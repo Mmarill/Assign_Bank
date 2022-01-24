@@ -51,9 +51,9 @@ class Bank():
             return True
 
     def get_customer(self, pnr):
-        customers = Bank._load(self)
+        Bank._load(self)
 
-        for i in customers:
+        for i in self.customers:
             x = re.sub("#", ":", str(i))
             y = x.split(":")
             str1 = ": "
