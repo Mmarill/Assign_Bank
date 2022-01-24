@@ -25,9 +25,8 @@ class Bank():
         Bank._load(self)
 
         for i in self.customer_data:
-            x = re.sub("#", ":", str(i))
-            y = x.split(":")
-            cstmr = Customer(y[1], y[2], y[3])
+            cust = i.strip().split(":")
+            cstmr = Customer(cust[1], cust[2], cust[3])
             self.customers.append(cstmr)
 
         return self.customers
@@ -51,16 +50,17 @@ class Bank():
             return True
 
     def get_customer(self, pnr):
+
         Bank._load(self)
 
-        for i in self.customers:
-            x = re.sub("#", ":", str(i))
-            y = x.split(":")
+        for i in self.customer_data:
+            x = i.strip().split(":")
             str1 = ": "
-            if y[2] == pnr:
-                print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccountNumber: {str1.join(y[3:])}")
+            if x[2] == pnr:
+                print(f"Name: {x[1]}\nPersonal number: {x[2]}\nAccountNumber: {str1.join(x[3:])}")
 
     def change_customer_name(name, pnr):
+
         textfil = Bank._load()
         for i in textfil:
             x = re.sub("#",":",str(i))
@@ -74,9 +74,8 @@ class Bank():
         Bank._load(self)
 
         for i in self.customer_data:
-            x = re.sub("#", ":", str(i))
-            y = x.split(":")
-            self.id.append(y[0])
+            x = i.strip().split(":")
+            self.id.append(x[0])
         
         last_id = int(self.id[-1]) + 1
 
