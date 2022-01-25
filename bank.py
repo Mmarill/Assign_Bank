@@ -87,21 +87,24 @@ class Bank():
             y = x.split(":")
             str1 = ": "
             if y[2] == pnr:
-                print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccountNumber: {str1.join(y[3:])}")
+                print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccounts: {str1.join(y[3:])}")
 
     def remove_customer(self, pnr):
 
         Bank._load(self)
 
-        for line in self.customer_data:
-            if str(pnr) in line:
-                index = self.customer_data.index(line)
-                # line.split(":")
-                # new_line = "".strip("\n")
-                # self.customer_data[index] = new_line
-                self.customer_data.pop(index)
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
+            return False
+        else:   
+            for line in self.customer_data:
+                if str(pnr) in line:
+                    index = self.customer_data.index(line)
+                    print(index)
+                    self.customer_data.pop(index)
 
         print(self.customer_data)
+
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % l for l in self.customer_data)
 
