@@ -57,11 +57,6 @@ class Bank():
             else:
                 pass
 
-    def get_top_account(self):
-
-        Bank.get_accounts(self)    
-        return max(self.accountNo)
-
     def add_customer(self, name, pnr):
 
         Bank._load(self)
@@ -74,7 +69,7 @@ class Bank():
             return False
         else:
             textfile = open("customers.txt","a")
-            textfile.write(f'\n{id}:{name}:{pnr}' )
+            textfile.write('\n' + Bank.get_new_id(self) + f':{name}:{pnr}')
             textfile.close()
             return True
 
@@ -87,7 +82,21 @@ class Bank():
             str1 = ": "
             if y[2] == pnr:
                 print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccounts: {str1.join(y[3:])}")
+    
+    def change_customer_name(self, newname, pnr):
+        Bank._load(self)
 
+        for line in self.customer_data:
+            if str(pnr) in line:
+                index = self.customer_data.index(line)
+                name = line.split(":")[1]
+                new_line = line.replace(name, newname)
+                self.customer_data[index] = new_line
+
+        print(self.customer_data)
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % l for l in self.customer_data)
+    
     def remove_customer(self, pnr):
 
         Bank._load(self)
@@ -107,7 +116,7 @@ class Bank():
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % l for l in self.customer_data)
 
-    def get_last_id(self):
+    def get_new_id(self):
 
         Bank._load(self)
 
@@ -115,23 +124,16 @@ class Bank():
             x = i.strip().split(":")
             self.id.append(x[0])
         
-        last_id = int(self.id[-1]) + 1
+        new_id = int(self.id[-1]) + 1
+        
+        return str(new_id)
 
-        return last_id
+    def get_top_account(self):
 
-    def change_customer_name(self, newname, pnr):
-        Bank._load(self)
+        Bank.get_accounts(self)    
+        return max(self.accountNo)
 
-        for line in self.customer_data:
-            if str(pnr) in line:
-                index = self.customer_data.index(line)
-                name = line.split(":")[1]
-                new_line = line.replace(name, newname)
-                self.customer_data[index] = new_line
-
-        print(self.customer_data)
-        with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % l for l in self.customer_data)
+    
 
 # class Bank():
 
