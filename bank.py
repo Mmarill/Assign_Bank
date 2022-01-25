@@ -34,10 +34,15 @@ class Bank():
         return self.customers
 
     def get_accounts(self):
-        account_data = []
-        for x in self.customer_data:
+        
+        Bank._load(self)
+        account_data = {}
+
+        for i in self.customer_data:
+            x = i.split(":")
             account_data[x[0]] = x[3:]
-        for x, y in account_data:
+
+        for x, y in account_data.items():
             if len(y) > 3:
                 first_account = Account(int(x), int(y[0]), y[1], float(y[2].split("#")[0]))
                 second_account = Account(int(x), int(y[2].split("#")[1]), y[3], float(y[4]))
@@ -49,7 +54,14 @@ class Bank():
             else:
                 pass
 
-           
+        print(self.accounts)
+    
+    def get_customer_account(self, id):
+        Bank.get_accounts(self)    
+        
+        for line in self.accounts:
+            if id in line:
+                print(line)
 
     def add_customer(self, name, pnr):
 
@@ -67,15 +79,31 @@ class Bank():
             textfile.close()
             return True
 
-    def get_customer(pnr):
-        customers = Bank._load()
+    def get_customer(self, pnr):
+        Bank._load(self)
 
-        for i in customers:
+        for i in self.customer_data:
             x = re.sub("#", ":", str(i))
             y = x.split(":")
             str1 = ": "
             if y[2] == pnr:
                 print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccountNumber: {str1.join(y[3:])}")
+
+    def remove_customer(self, pnr):
+
+        Bank._load(self)
+
+        for line in self.customer_data:
+            if str(pnr) in line:
+                index = self.customer_data.index(line)
+                # line.split(":")
+                # new_line = "".strip("\n")
+                # self.customer_data[index] = new_line
+                self.customer_data.pop(index)
+
+        print(self.customer_data)
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % l for l in self.customer_data)
 
     def get_last_id(self):
 
