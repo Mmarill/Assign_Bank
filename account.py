@@ -7,7 +7,7 @@ class Account():
         self.accountNo = accountNo
     
     def __str__(self):
-        return self.id + "" + self.balance + " " + self.accountType + " " + self.accountNo
+        return str(self.id) + " " + str(self.balance) + " " + str(self.accountType) + " " + str(self.accountNo)
 
     def __repr__(self):
         return "{}:{}:{}:{}".format(self.id, self.balance, self.accountType, self.accountNo)

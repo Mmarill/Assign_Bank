@@ -9,6 +9,7 @@ class Bank():
     ctxt = "customers.txt"
     customer_data = []
     accounts = []
+    accountNo = []
 
     def __init__(self):
         self.name = "MyBank" 
@@ -48,20 +49,18 @@ class Bank():
                 second_account = Account(int(x), int(y[2].split("#")[1]), y[3], float(y[4]))
                 self.accounts.append(first_account)
                 self.accounts.append(second_account)
+                self.accountNo.append(y[0])
+                self.accountNo.append(y[2].split("#")[1])
             elif len(y) == 3:
                 first_account = Account(int(x), int(y[0]), y[1], float(y[2]))
                 self.accounts.append(first_account)
             else:
                 pass
 
-        print(self.accounts)
-    
-    def get_customer_account(self, id):
+    def get_top_account(self):
+
         Bank.get_accounts(self)    
-        
-        for line in self.accounts:
-            if id in line:
-                print(line)
+        return max(self.accountNo)
 
     def add_customer(self, name, pnr):
 
