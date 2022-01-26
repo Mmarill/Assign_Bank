@@ -11,7 +11,6 @@ class Bank():
     accounts = []
     accountNo = []
     acc = []
-    list1 = []
 
     def __init__(self):
         self.name = "MyBank" 
@@ -38,12 +37,6 @@ class Bank():
     
     def get_customer(self, pnr):
 
-        self.acc = []
-        self.accounts = []
-        self.customers = []
-        firstacc = ""
-        secondacc = ""
-
         Bank.get_accounts(self)
         Bank.get_customers(self)
         
@@ -68,6 +61,7 @@ class Bank():
 
     def get_accounts(self):
         self.accounts = []
+        self.accountNo = []
         Bank._load(self)
         account_data = {}
 
@@ -86,12 +80,36 @@ class Bank():
             elif len(y) == 3:
                 first_account = Account(int(x), int(y[0]), y[1], float(y[2]))
                 self.accounts.append(first_account)
+                self.accountNo.append(y[0])
             else:
                 pass
-        
+        print(self.accountNo)
         return self.accounts
+    
+    def get_account(self, pnr, id):
 
-        
+        Bank.get_accounts(self)
+        Bank.get_customers(self)
+
+        for i in self.customers:
+            if pnr in repr(i):
+                x = str(i).split()
+                y = x[0], x[1], x[2], x[3]
+                id = y[0]
+                for line in self.accounts:
+                    if id in str(line):
+                            self.acc.append(line)
+                            z = re.sub(",", ":", str(self.acc))
+                            t = str(z).strip().split(":")
+                            if len(t) > 3:
+                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
+                                secondacc = (f"Second account: \n\tAccount no: {t[3]}\n\tAccount type: {t[4]}\n\tBalance: {t[5]}")
+                            elif len(t) == 3:
+                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
+                                secondacc = (f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
+    
+        print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
+
     def add_customer(self, name, pnr):
 
         Bank._load(self)
@@ -100,11 +118,11 @@ class Bank():
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
             return False
         elif any(pnr in s for s in self.customer_data):
-            print("Customer with same socail security number already exists")
+            print("Customer with same social security number already exists")
             return False
         else:
             textfile = open("customers.txt","a")
-            textfile.write('\n' + Bank.get_new_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:')
+            textfile.write('\n' + Bank.get_new_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
             textfile.close()
             return True
 
@@ -154,12 +172,10 @@ class Bank():
         return str(new_id)
 
     def get_top_account(self):
+        self.accountNo = []
 
         Bank.get_accounts(self)    
+        print(self.accountNo)
         newAccount = int(max(self.accountNo)) + 1
 
         return str(newAccount)
-
-m = Bank()
-m.get_customers()
-m.get_accounts()
