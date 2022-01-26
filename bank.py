@@ -30,9 +30,19 @@ class Bank():
         for i in self.customer_data:
             x = re.sub("#", ":", str(i))
             y = x.split(":")
-            cstmr = Customer(y[1], y[2], y[3])
+            cstmr = Customer(y[0], y[1], y[2])
             self.customers.append(cstmr)
+
         return self.customers
+    
+    def get_customer_test(self, pnr):
+
+        Bank.get_customers(self)
+
+        for i in self.customers:
+            if pnr in repr(i):
+                print(i)    
+
 
     def get_accounts(self):
         
@@ -56,7 +66,14 @@ class Bank():
                 self.accounts.append(first_account)
             else:
                 pass
+    
+    # def get_account_test(self):
 
+    #     Bank.get_accounts(self)
+
+    #     for i in self.accounts:
+
+        
     def add_customer(self, name, pnr):
 
         Bank._load(self)
@@ -69,7 +86,7 @@ class Bank():
             return False
         else:
             textfile = open("customers.txt","a")
-            textfile.write('\n' + Bank.get_new_id(self) + f':{name}:{pnr}')
+            textfile.write('\n' + Bank.get_new_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:')
             textfile.close()
             return True
 
@@ -131,7 +148,9 @@ class Bank():
     def get_top_account(self):
 
         Bank.get_accounts(self)    
-        return max(self.accountNo)
+        newAccount = int(max(self.accountNo)) + 1
+
+        return str(newAccount)
 
     
 
