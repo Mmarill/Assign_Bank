@@ -25,7 +25,7 @@ class Bank():
         return self.customer_data
 
     def get_customers(self):
-        
+        self.customers = []
         Bank._load(self)
 
         for i in self.customer_data:
