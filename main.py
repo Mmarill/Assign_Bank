@@ -1,6 +1,6 @@
-import bank
+from bank import Bank
 
-myBank = bank.Bank()
+myBank = Bank()
 
 # ans=True
 # while ans:
