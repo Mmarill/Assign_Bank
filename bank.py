@@ -60,8 +60,10 @@ class Bank():
         print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
 
     def get_accounts(self):
+
         self.accounts = []
         self.accountNo = []
+
         Bank._load(self)
         account_data = {}
 
@@ -83,33 +85,31 @@ class Bank():
                 self.accountNo.append(y[0])
             else:
                 pass
-        print(self.accountNo)
-        return self.accounts
-    
-    def get_account(self, pnr, id):
 
+    def get_account(self, pnr, id):
         Bank.get_accounts(self)
         Bank.get_customers(self)
-
-        for i in self.customers:
-            if pnr in repr(i):
-                x = str(i).split()
-                y = x[0], x[1], x[2], x[3]
-                id = y[0]
-                for line in self.accounts:
-                    if id in str(line):
-                            self.acc.append(line)
-                            z = re.sub(",", ":", str(self.acc))
-                            t = str(z).strip().split(":")
-                            if len(t) > 3:
-                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                                secondacc = (f"Second account: \n\tAccount no: {t[3]}\n\tAccount type: {t[4]}\n\tBalance: {t[5]}")
-                            elif len(t) == 3:
-                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                                secondacc = (f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
+        temp = 0
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
+        else:
+            for i in self.customers:
+                if pnr in repr(i):
+                    x = str(i).split()
+                    cstm_id = x[0]
+                    for line in self.accounts:
+                        if cstm_id + id in str(line):
+                            linelist = str(line).split(" ")
+                            return f"Account number: {linelist[1]}, account type: {linelist[2]} {linelist[3]}, balance: {linelist[4]}"
+                        else:
+                            temp += 2
+                    if temp == len(self.accounts)*2:
+                        print(f"This customer doesnt have an account with this id: {id}")
+                elif pnr not in repr(i):
+                    temp += 1
+            if temp==len(self.customers): 
+                print(f"No customer with either social security number: {pnr} or with account number: {id}")
     
-        print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
-
     def add_customer(self, name, pnr):
 
         Bank._load(self)
@@ -136,7 +136,7 @@ class Bank():
                 new_line = line.replace(name, newname)
                 self.customer_data[index] = new_line
 
-        print(self.customer_data)
+     
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % l for l in self.customer_data)
     
