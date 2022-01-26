@@ -10,10 +10,12 @@ class Bank():
     customer_data = []
     accounts = []
     accountNo = []
+    acc = []
+    list1 = []
 
     def __init__(self):
         self.name = "MyBank" 
-            
+           
     
     def _load(self):
         self.customer_data = []
@@ -35,17 +37,38 @@ class Bank():
 
         return self.customers
     
-    def get_customer_test(self, pnr):
+    def get_customer(self, pnr):
 
+        self.acc = []
+        self.accounts = []
+        self.customers = []
+        firstacc = ""
+        secondacc = ""
+
+        Bank.get_accounts(self)
         Bank.get_customers(self)
-
+        
         for i in self.customers:
             if pnr in repr(i):
-                print(i)    
-
+                x = str(i).split()
+                y = x[0], x[1], x[2], x[3]
+                id = y[0]
+                for line in self.accounts:
+                    if id in str(line):
+                            self.acc.append(line)
+                            z = re.sub(",", ":", str(self.acc))
+                            t = str(z).strip().split(":")
+                            if len(t) > 3:
+                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
+                                secondacc = (f"Second account: \n\tAccount no: {t[3]}\n\tAccount type: {t[4]}\n\tBalance: {t[5]}")
+                            elif len(t) == 3:
+                                firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
+                                secondacc = (f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
+    
+        print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
 
     def get_accounts(self):
-        
+        self.accounts = []
         Bank._load(self)
         account_data = {}
 
@@ -66,7 +89,8 @@ class Bank():
                 self.accounts.append(first_account)
             else:
                 pass
-    
+        
+        return self.accounts
     # def get_account_test(self):
 
     #     Bank.get_accounts(self)
@@ -90,16 +114,6 @@ class Bank():
             textfile.close()
             return True
 
-    def get_customer(self, pnr):
-        Bank._load(self)
-
-        for i in self.customer_data:
-            x = re.sub("#", ":", str(i))
-            y = x.split(":")
-            str1 = ": "
-            if y[2] == pnr:
-                print(f"Name: {y[1]}\nPersonal number: {y[2]}\nAccounts: {str1.join(y[3:])}")
-    
     def change_customer_name(self, newname, pnr):
         Bank._load(self)
 
