@@ -16,7 +16,6 @@ class Bank():
     def __init__(self):
         self.name = "MyBank" 
            
-    
     def _load(self):
         self.customer_data = []
 
@@ -91,11 +90,6 @@ class Bank():
                 pass
         
         return self.accounts
-    # def get_account_test(self):
-
-    #     Bank.get_accounts(self)
-
-    #     for i in self.accounts:
 
         
     def add_customer(self, name, pnr):
@@ -166,155 +160,6 @@ class Bank():
 
         return str(newAccount)
 
-    
-
-# class Bank():
-
-#     customers = []
-#     cstmrtxt = "customers.txt"
-#     id = []
-
-#     def __init__(self):
-#         self.customer_data = []
-#         self.name = "MyBank" 
-    
-#     def _load(self):
-      
-#         with open(self.cstmrtxt) as textfil:
-#             for line in textfil:
-#                 a = re.sub("#",":", str(line))
-#                 b = a.split(":")
-#                 customer = {"customer":Customer( b[0], b[1], b[2]), "id":b[0], "pnr":b[2]}
-#                 number_of_accounts = int((len(b)-3)/3)
-#                 accounts = []
-#                 while number_of_accounts > 0:
-#                     x = 3+3*(number_of_accounts - 1)
-#                     accountobj = Account(b[x],b[x+1],b[x+2])
-#                     number_of_accounts-=1
-#                     accounts.append(accountobj)
-#                     customer["accounts"] = accounts
-#                     self.customer_data.append(customer)
-#         return self.customer_data
-
-#     def get_customers(self):
-        
-#         Bank._load(self)
-
-#         for i in self.customer_data:
-#             cstmr = i["customer"]
-#             self.customers.append(cstmr)
-
-#         return self.customers
-
-#     def add_customer(self, name, pnr):
-
-#         Bank._load(self)
-        
-#         id = Bank.get_last_id(self)
-
-
-#         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
-#             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
-#             return False
-#         elif any(pnr in s for s in self.customer_data):
-#             print("Customer with same socail security number already exists")
-#             return False
-#         else:
-#             textfile = open("customers.txt","a")
-#             textfile.write(f'\n{id}:{name}:{pnr}' )
-#             textfile.close()
-#             return True
-
-#     def get_customer(self, pnr):
-
-#         Bank._load(self)
-
-#         for i in self.customer_data:
-#             if any(pnr in s for s in self.customer_data):
-#                 print(i["customer"])
-#             break
-        
-
-#         # for i in self.customers:
-#         #     if pnr == 
-
-#         # for i in self.customer_data:
-#         #     x = i.strip().split(":")
-#         #     str1 = ": "
-#         #     if x[2] == pnr:
-#         #         print(f"Name: {x[1]}\nPersonal number: {x[2]}\nAccountNumber: {str1.join(x[3:])}")
-
-#     def change_customer_name(self, pnr, name):
-
-#         # Bank._load(self)
-
-#         # Bank.get_customers(self)
-
-#         # pnr = input("Enter social security number for the customer whose name you want to change: ")
-#         # name = input("Enter the new name for the customer: ")
-
-#         # for line in self.customer_data:
-#         #     # x = line.strip().split(":")
-#         #     if pnr in line:
-#         #         index = lines.index(line)
-#         #         new_line = line
-#         #         lines[index] = new_line
-#         #         f = open(self.cstmrtxt, "w")
-#         #         f.writelines(line)
-#         #         f.close()
-
-#         # f = open(self.cstmrtxt, "r")
-#         # lines = f.readlines()
-#         # f.close()
-
-#         # for line in lines:
-#         #     if str(pnr) in line:
-#         #         print(line[1])
-#         #         index = lines.index(line)
-#         #         new_line = line.replace(line[1], newname)
-#         #         lines[index] = new_line
-    
-
-#         # f = open(self.cstmrtxt, "w")
-#         # f.writelines(lines)
-#         # f.close()
-
-#         Bank._load(self)
-
-#         for i in self.customer_data:
-#             x = i.strip().split(":")
-#             str1 = ": "
-#             if x[2] == pnr:
-#                 index = self.customer_data.index(x)
-#                 new_line =(f"Name: {name}\nPersonal number: {x[2]}\nAccountNumber: {str1.join(x[3:])}")
-#                 self.customer_data[index] = new_line
-
-#         f = open(self.cstmrtxt, "w")
-#         f.writelines(new_line)
-#         f.close
-
-#     def get_last_id(self):
-
-#         Bank._load(self)
-
-#         for i in self.customer_data:
-#             self.id.append(i["id"])
-        
-#         last_id = int(self.id[-1]) + 1
-
-#         return last_id
-
-#     def print_cust(self):
-
-#         Bank.get_customers(self)
-
-#         for i in self.customers:
-#             print(i)
-
-#     def get_account(self):
-
-#         Bank._load(self)
-
-#         print(self.accounts)
-    
-    
+m = Bank()
+m.get_customers()
+m.get_accounts()
