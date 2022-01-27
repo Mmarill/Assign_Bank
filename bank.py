@@ -10,6 +10,7 @@ class Bank:
     # customers = []
     # id = []
     ctxt = "customers.txt"
+
     # customer_data = []
     # accounts = []
     # accountNo = []
@@ -170,25 +171,21 @@ class Bank:
                     print(f'Name changed from {name} to {newname}')
         else:
             print(f'No customer with {pnr} exists')
-            
+
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
 
     def remove_customer(self, pnr):
-
-        Bank._load(self)
 
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
             return False
         else:
             for line in self.customer_data:
-                if str(pnr) in line:
+                if pnr in line:
                     index = self.customer_data.index(line)
                     print(index)
                     self.customer_data.pop(index)
-
-        print(self.customer_data)
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % l for l in self.customer_data)
@@ -211,6 +208,24 @@ class Bank:
 
         return str(newaccount)
 
+    def withdraw(self, pnr, acc_id, amount):
+
+        for i in self.customer_data:
+            if pnr in repr(i):
+                index = self.customer_data.index(i)
+                x = i.replace("#", ":").split(":")
+                newindex = x.index(acc_id)
+                old_bal = x[newindex + 2]
+                new_bal = int(old_bal[:-2]) - int(amount)
+                if new_bal < 0:
+                    return "Not enough money in account"
+                new_line = i.replace(old_bal, str(new_bal) + ".0")
+                self.customer_data[index] = new_line
+
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % l for l in self.customer_data)
+
+        print(f'You have withdrawn ${amount} from {acc_id} new balance: ${new_bal}')
 
 m = Bank()
-m.get_customers()
+m.withdraw("123456-1234", "1006", "200")
