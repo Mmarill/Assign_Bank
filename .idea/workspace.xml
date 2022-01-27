@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="Fix objektorient">
+    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="test counter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/account.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/customers.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,13 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1643293681285</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="test counter">
+      <created>1643296329813</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1643296329813</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -91,6 +99,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix objektorient" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix objektorient" />
+    <MESSAGE value="test counter" />
+    <option name="LAST_COMMIT_MESSAGE" value="test counter" />
   </component>
 </project>
