@@ -7,12 +7,8 @@ from account import Account
 
 
 class Bank:
-
-    # customers = []
     id = []
     ctxt = "customers.txt"
-
-    # customer_data = []
     accounts = []
     accountNo = []
     acc = []
@@ -71,28 +67,6 @@ class Bank:
                                 f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
 
                 print(f"Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n{firstacc}{secondacc}")
-
-    # def get_customer_test(self, pnr):
-    #
-    #     temp = []
-    #     if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
-    #         print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
-    #     else:
-    #         for x in self.customers:
-    #             if pnr == x.pnr:
-    #                 for y in self.accounts:
-    #                     if y.id == x.id:
-    #                         temp.append(y)
-    #                         # print(temp)
-    #                         counter = str(self.acc_list).count(x.id)
-    #                         temp.strip(",")
-    #                         if counter < 2:
-    #                             print("k")
-    #                         if counter == 2:
-    #                             print(temp[0])
-    #                             print(temp[1])
-    #                             # first_account = str(temp[0]), temp[1], float(temp[2].split(":")[0])
-    #                             # print(first_account)
 
     def load_accounts(self):
 
@@ -201,7 +175,7 @@ class Bank:
 
         newaccount = int(max(self.accountNo)) + 1
 
-        return print(str(newaccount))
+        return str(newaccount)
 
     def withdraw(self, pnr, acc_id, amount):
 
@@ -240,6 +214,7 @@ class Bank:
             f.writelines("%s\n" % line for line in self.customer_data)
 
         print(f'You have deposited ${amount} from {acc_id} new balance: ${new_bal}')
+
 
 m = Bank()
 m.deposit("460383-3545", "1007", "300")
