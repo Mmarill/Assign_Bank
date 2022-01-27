@@ -3,7 +3,7 @@ from customer import Customer
 from account import Account
 
 class Bank():
-    
+
     customers = []
     id = []
     ctxt = "customers.txt"
@@ -13,7 +13,7 @@ class Bank():
     acc = []
 
     def __init__(self):
-        self.name = "MyBank" 
+        self.name = "MyBank"
         self.customers = []
         self._load()
         self.get_customers()
@@ -35,18 +35,17 @@ class Bank():
             self.customers.append(cstmr)
 
         return self.customers
-    
+
     def get_customers_test(self):
-        
+
         for cstmr in self.customers:
             print(cstmr.name, cstmr.id, cstmr.pnr)
-
 
     def get_customer(self, pnr):
 
         Bank.get_accounts(self)
         Bank.get_customers(self)
-        
+
         for i in self.customers:
             if pnr in repr(i):
                 x = str(i).split()
@@ -63,7 +62,7 @@ class Bank():
                             elif len(t) == 3:
                                 firstacc = (f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
                                 secondacc = (f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
-    
+
         print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
 
     def get_accounts(self):
@@ -114,13 +113,11 @@ class Bank():
                         print(f"This customer doesnt have an account with this id: {id}")
                 elif pnr not in repr(i):
                     temp += 1
-            if temp==len(self.customers): 
+            if temp==len(self.customers):
                 print(f"No customer with either social security number: {pnr} or with account number: {id}")
-    
+
     def add_customer(self, name, pnr):
 
-        Bank._load(self)
-      
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
             return False
@@ -143,10 +140,9 @@ class Bank():
                 new_line = line.replace(name, newname)
                 self.customer_data[index] = new_line
 
-     
         with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % l for l in self.customer_data)
-    
+            f.writelines("%s\n" % line for line in self.customer_data)
+
     def remove_customer(self, pnr):
 
         Bank._load(self)
@@ -154,7 +150,7 @@ class Bank():
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
             return False
-        else:   
+        else:
             for line in self.customer_data:
                 if str(pnr) in line:
                     index = self.customer_data.index(line)
@@ -173,17 +169,18 @@ class Bank():
         for i in self.customer_data:
             x = i.strip().split(":")
             self.id.append(x[0])
-        
+
         new_id = int(self.id[-1]) + 1
-        
+
         return str(new_id)
 
     def get_top_account(self):
         self.accountNo = []
 
-        Bank.get_accounts(self)    
-        print(self.accountNo)
+        Bank.get_accounts(self)
         newAccount = int(max(self.accountNo)) + 1
 
         return str(newAccount)
 
+m = Bank()
+m.get_customer("401132-0676")
