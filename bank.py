@@ -1,4 +1,7 @@
 import re
+from collections import Counter
+from itertools import count
+
 from customer import Customer
 from account import Account
 
@@ -46,16 +49,10 @@ class Bank:
 
     def get_customer(self, pnr):
 
-        Bank.get_accounts(self)
-        Bank.get_customers(self)
-
         for i in self.customers:
-            if pnr in repr(i):
-                x = str(i).split()
-                y = x[0], x[1], x[2], x[3]
-                id = y[0]
+            if pnr == i.pnr:
                 for line in self.accounts:
-                    if id in str(line):
+                    if i.id == line.id:
                         self.acc.append(line)
                         z = re.sub(",", ":", str(self.acc))
                         t = str(z).strip().split(":")
@@ -70,23 +67,24 @@ class Bank:
                             secondacc = (
                                 f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
 
-        print(f"Customer id: {y[0]}\nName: {y[1]} {y[2]}\nSocial security number: {y[3]}\n{firstacc}{secondacc}")
+                print(f"Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n{firstacc}{secondacc}")
 
-    def get_customer(self, pnr):
+    def get_customer_test(self, pnr):
 
-        for x in self.customers:
-            if pnr == x.pnr:
-
-                if len(t) > 3:
-                    firstacc = (
-                        f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                    secondacc = (
-                        f"Second account: \n\tAccount no: {t[3]}\n\tAccount type: {t[4]}\n\tBalance: {t[5]}")
-                elif len(t) == 3:
-                    firstacc = (
-                        f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                    secondacc = (
-                        f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
+        else:
+            for x in self.customers:
+                if pnr == x.pnr:
+                    for y in self.accounts:
+                        if y.id == x.id:
+                            count = Counter(x.id)
+                            print(y.id)
+                            print(count)
+                            if count < 2:
+                                print("o")
+                            # if len(str(y)) > 3:
+                            #     print(x.name, x.pnr, y.accountNo, y.accountType, y.balance)
 
     def load_accounts(self):
 
@@ -204,4 +202,4 @@ class Bank:
 
 
 m = Bank()
-m.get_customer("401132-0676")
+m.get_customer_test("460383-3555")
