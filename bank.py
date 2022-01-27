@@ -14,7 +14,10 @@ class Bank():
 
     def __init__(self):
         self.name = "MyBank" 
-           
+        self.customers = []
+        self._load()
+        self.get_customers()
+
     def _load(self):
         self.customer_data = []
 
@@ -24,8 +27,6 @@ class Bank():
         return self.customer_data
 
     def get_customers(self):
-        self.customers = []
-        Bank._load(self)
 
         for i in self.customer_data:
             x = re.sub("#", ":", str(i))
@@ -35,6 +36,12 @@ class Bank():
 
         return self.customers
     
+    def get_customers_test(self):
+        
+        for cstmr in self.customers:
+            print(cstmr.name, cstmr.id, cstmr.pnr)
+
+
     def get_customer(self, pnr):
 
         Bank.get_accounts(self)
@@ -179,3 +186,4 @@ class Bank():
         newAccount = int(max(self.accountNo)) + 1
 
         return str(newAccount)
+
