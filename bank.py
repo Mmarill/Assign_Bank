@@ -7,16 +7,18 @@ from account import Account
 
 
 class Bank:
+
     # customers = []
-    # id = []
+    id = []
     ctxt = "customers.txt"
 
     # customer_data = []
-    # accounts = []
-    # accountNo = []
-    # acc = []
+    accounts = []
+    accountNo = []
+    acc = []
 
     def __init__(self):
+
         self.name = "MyBank"
         self.customers = []
         self._load()
@@ -94,9 +96,6 @@ class Bank:
 
     def load_accounts(self):
 
-        self.accounts = []
-        self.accountNo = []
-
         account_data = {}
 
         for i in self.customer_data:
@@ -104,25 +103,21 @@ class Bank:
             account_data[x[0]] = x[3:]
 
         for x, y in account_data.items():
-            if len(y) > 3:
-                first_account = Account(str(x), str(y[0]), y[1], float(y[2].split("#")[0]))
-                second_account = Account(str(x), str(y[2].split("#")[1]), y[3], float(y[4]))
+            if len(y) == 3:
+                first_account = Account(str(x), str(y[0]), y[1], float(y[2]))
+                self.accounts.append(first_account)
+                self.accountNo.append(y[0])
+            elif len(y) > 3:
+                first_account = Account(int(x), int(y[0]), y[1], float(y[2].split("#")[0]))
+                second_account = Account(int(x), int(y[2].split("#")[1]), y[3], float(y[4]))
                 self.accounts.append(first_account)
                 self.accounts.append(second_account)
                 self.accountNo.append(y[0])
                 self.accountNo.append(y[2].split("#")[1])
-            elif len(y) == 3:
-                first_account = Account(str(x), str(y[0]), y[1], float(y[2]))
-                self.accounts.append(first_account)
-                self.accountNo.append(y[0])
             else:
                 pass
 
-        return self.accounts
-
     def get_accounts(self):
-
-        self.acc_list = []
 
         for i in self.accounts:
             account = str(i.id) + " " + str(i.accountno) + i.accounttype + str(i.balance)
@@ -204,9 +199,9 @@ class Bank:
 
     def get_top_account(self):
 
-        newaccount: int = (max(self.accountNo)) + 1
+        newaccount = int(max(self.accountNo)) + 1
 
-        return str(newaccount)
+        return print(str(newaccount))
 
     def withdraw(self, pnr, acc_id, amount):
 
@@ -223,9 +218,28 @@ class Bank:
                 self.customer_data[index] = new_line
 
         with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % l for l in self.customer_data)
+            f.writelines("%s\n" % line for line in self.customer_data)
 
         print(f'You have withdrawn ${amount} from {acc_id} new balance: ${new_bal}')
 
+    def deposit(self, pnr, acc_id, amount):
+
+        for i in self.customer_data:
+            if pnr in repr(i):
+                index = self.customer_data.index(i)
+                x = i.replace("#", ":").split(":")
+                newindex = x.index(acc_id)
+                old_bal = x[newindex + 2]
+                new_bal = int(old_bal[:-2]) + int(amount)
+                if new_bal < 0:
+                    return "Not enough money in account"
+                new_line = i.replace(old_bal, str(new_bal) + ".0")
+                self.customer_data[index] = new_line
+
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % line for line in self.customer_data)
+
+        print(f'You have deposited ${amount} from {acc_id} new balance: ${new_bal}')
+
 m = Bank()
-m.withdraw("123456-1234", "1006", "200")
+m.deposit("460383-3545", "1007", "300")

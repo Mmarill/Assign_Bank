@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="Name changes and tests">
+    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="withdraw()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/customers.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +87,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1643301453430</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="withdraw()">
+      <created>1643302667448</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1643302667448</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -106,6 +111,7 @@
     <MESSAGE value="Fix objektorient" />
     <MESSAGE value="test counter" />
     <MESSAGE value="Name changes and tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Name changes and tests" />
+    <MESSAGE value="withdraw()" />
+    <option name="LAST_COMMIT_MESSAGE" value="withdraw()" />
   </component>
 </project>

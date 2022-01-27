@@ -2,5 +2,5 @@
 11112:Aubrey Sigg:460383-3555:1003:debit account:0.0#1004:debit account:500.0
 11113:Otti Elvén:401132-0676:1005:debit account:35.0
 11114:Max Hjelm:123456-1234:1006:debit account:1605.0
-11115:Matti H:460383-3545:1007:debit account:0.0
+11115:Matti H:460383-3545:1007:debit account:300.0
 11117:Matti H:467343-3545:1009:debit account:0.0
