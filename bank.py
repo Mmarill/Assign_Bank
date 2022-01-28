@@ -7,6 +7,7 @@ from account import Account
 
 
 class Bank:
+
     id = []
     ctxt = "customers.txt"
     accounts = []
@@ -17,13 +18,13 @@ class Bank:
 
         self.name = "MyBank"
         self.customers = []
+        self.acc_list = []
         self._load()
         self.load_customers()
         self.load_accounts()
-        self.acc_list = []
-        self.get_accounts()
 
     def _load(self):
+
         self.customer_data = []
 
         with open(self.ctxt) as txtFile:
@@ -70,6 +71,8 @@ class Bank:
 
     def load_accounts(self):
 
+        self.accounts = []
+
         account_data = {}
 
         for i in self.customer_data:
@@ -93,9 +96,13 @@ class Bank:
 
     def get_accounts(self):
 
+        Bank.load_accounts(self)
+        self.acc_list = []
+
         for i in self.accounts:
-            account = str(i.id) + " " + str(i.accountno) + i.accounttype + str(i.balance)
+            account = str(i.id) + " " + str(i.accountno) + " " + i.accounttype + " " + str(i.balance)
             self.acc_list.append(account)
+            print(account)
 
     def get_account(self, pnr, acc_no):
 
@@ -185,10 +192,10 @@ class Bank:
                 x = i.replace("#", ":").split(":")
                 newindex = x.index(acc_id)
                 old_bal = x[newindex + 2]
-                new_bal = int(old_bal[:-2]) - int(amount)
+                new_bal = float(old_bal[:-2]) - float(amount)
                 if new_bal < 0:
                     return "Not enough money in account"
-                new_line = i.replace(old_bal, str(new_bal) + ".0")
+                new_line = i.replace(old_bal, str(new_bal))
                 self.customer_data[index] = new_line
 
         with open(self.ctxt, "w") as f:
@@ -204,17 +211,32 @@ class Bank:
                 x = i.replace("#", ":").split(":")
                 newindex = x.index(acc_id)
                 old_bal = x[newindex + 2]
-                new_bal = int(old_bal[:-2]) + int(amount)
+                new_bal = float(old_bal[:-2]) + float(amount)
                 if new_bal < 0:
                     return "Not enough money in account"
-                new_line = i.replace(old_bal, str(new_bal) + ".0")
+                new_line = i.replace(old_bal, str(new_bal))
                 self.customer_data[index] = new_line
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
 
-        print(f'You have deposited ${amount} from {acc_id} new balance: ${new_bal}')
+        print(f'You have deposited ${amount} to {acc_id} new balance: ${new_bal}')
+
+    def close_account(self, pnr, acc_id):
+
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
+            return False
+        else:
+            for line in self.accounts:
+
+            for line in self.customer_data:
+                if pnr in line:
+                    index = self.customer_data.index(line)
+                    print(index)
+                    self.customer_data.pop(index)
+
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % l for l in self.customer_data)
 
 
-m = Bank()
-m.deposit("460383-3545", "1007", "300")
