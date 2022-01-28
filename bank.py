@@ -70,29 +70,45 @@ class Bank:
                 print(f"Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n{firstacc}{secondacc}")
 
     def load_accounts(self):
-
         self.accounts = []
-
         account_data = {}
 
         for i in self.customer_data:
-            x = i.split(":")
+            x = i.replace("#", ":").split(":")
             account_data[x[0]] = x[3:]
 
         for x, y in account_data.items():
-            if len(y) == 3:
-                first_account = Account(str(x), str(y[0]), y[1], float(y[2]))
+            nr_acc = len(y) / 3
+            while nr_acc > 0:
+                first_account = Account(str(x), y.pop(0), y.pop(0), y.pop(0))
                 self.accounts.append(first_account)
-                self.accountNo.append(y[0])
-            elif len(y) > 3:
-                first_account = Account(int(x), int(y[0]), y[1], float(y[2].split("#")[0]))
-                second_account = Account(int(x), int(y[2].split("#")[1]), y[3], float(y[4]))
-                self.accounts.append(first_account)
-                self.accounts.append(second_account)
-                self.accountNo.append(y[0])
-                self.accountNo.append(y[2].split("#")[1])
-            else:
-                pass
+                self.accountNo.append(first_account.accountno)
+                nr_acc -= 1
+
+    # def load_accounts(self):
+    #
+    #     self.accounts = []
+    #
+    #     account_data = {}
+    #
+    #     for i in self.customer_data:
+    #         x = i.split(":")
+    #         account_data[x[0]] = x[3:]
+    #
+    #     for x, y in account_data.items():
+    #         if len(y) == 3:
+    #             first_account = Account(str(x), str(y[0]), y[1], float(y[2]))
+    #             self.accounts.append(first_account)
+    #             self.accountNo.append(y[0])
+    #         elif len(y) > 3:
+    #             first_account = Account(int(x), int(y[0]), y[1], float(y[2].split("#")[0]))
+    #             second_account = Account(int(x), int(y[2].split("#")[1]), y[3], float(y[4]))
+    #             self.accounts.append(first_account)
+    #             self.accounts.append(second_account)
+    #             self.accountNo.append(y[0])
+    #             self.accountNo.append(y[2].split("#")[1])
+    #         else:
+    #             pass
 
     def get_accounts(self):
 
@@ -106,16 +122,19 @@ class Bank:
 
     def get_account(self, pnr, acc_no):
 
+        temp = []
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
         else:
             for x in self.customers:
                 if pnr == x.pnr:
                     for y in self.accounts:
-                        if acc_no == y.accountno and y.id == x.id:
-                            return f'{y.accountno}:{y.accounttype}:{y.balance}'
-                    return print(f"No account found with account number {acc_no}.")
-            return print(f"No customer found with {pnr} in list")
+                        if acc_no == y.accountno and x.id == y.id:
+                            potatis = (y.accountno + " " + y.accounttype + " "+ y.balance)
+                            temp.append(potatis)
+                            return str(temp).strip()
+            #         return print(f"No account found with account number {acc_no}.")
+            # return print(f"No customer found with {pnr} in list")
 
     def add_customer(self, name, pnr):
 
@@ -229,12 +248,16 @@ class Bank:
             return False
         else:
             for line in self.customer_data:
+                print(Bank.get_account(self, pnr, acc_no))
                 if Bank.get_account(self, pnr, acc_no) in line:
+                    print(line)
                     index = self.customer_data.index(line)
-
-
-
+                    for i in self.accounts:
+                        if i.accountno == acc_no:
+                            for x in self.customers:
+                                if x.id == i.id:
+                                    print(x.id)
 
 
 m = Bank()
-m.close_account("401132-0676", "1005")
+m.close_account("460383-3555", "1004")
