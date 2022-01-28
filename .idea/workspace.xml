@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="deposit()">
+    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="menu fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/customers.txt" afterDir="false" />
@@ -34,7 +34,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.bank">
     <configuration name="bank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Assign_Bank" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,8 +79,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.bank" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -129,7 +129,13 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1643304177056</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="menu fix">
+      <created>1643380508050</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1643380508050</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +155,7 @@
     <MESSAGE value="Name changes and tests" />
     <MESSAGE value="withdraw()" />
     <MESSAGE value="deposit()" />
-    <option name="LAST_COMMIT_MESSAGE" value="deposit()" />
+    <MESSAGE value="menu fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="menu fix" />
   </component>
 </project>

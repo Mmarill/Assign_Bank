@@ -113,7 +113,7 @@ class Bank:
                 if pnr == x.pnr:
                     for y in self.accounts:
                         if acc_no == y.accountno and y.id == x.id:
-                            return f'{y.accountno}, {y.accounttype}, {y.balance}'
+                            return f'{y.accountno}:{y.accounttype}:{y.balance}'
                     return print(f"No account found with account number {acc_no}.")
             return print(f"No customer found with {pnr} in list")
 
@@ -222,21 +222,19 @@ class Bank:
 
         print(f'You have deposited ${amount} to {acc_id} new balance: ${new_bal}')
 
-    def close_account(self, pnr, acc_id):
+    def close_account(self, pnr, acc_no):
 
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
             print("Sorry wrong format, please enter personal number as xxxxxx-xxxx")
             return False
         else:
-            for line in self.accounts:
-
             for line in self.customer_data:
-                if pnr in line:
+                if Bank.get_account(self, pnr, acc_no) in line:
                     index = self.customer_data.index(line)
-                    print(index)
-                    self.customer_data.pop(index)
-
-        with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % l for l in self.customer_data)
 
 
+
+
+
+m = Bank()
+m.close_account("401132-0676", "1005")
