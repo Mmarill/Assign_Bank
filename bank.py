@@ -1,6 +1,4 @@
 import re
-from collections import Counter
-from itertools import count
 
 from customer import Customer
 from account import Account
@@ -50,23 +48,14 @@ class Bank:
 
         for i in self.customers:
             if pnr == i.pnr:
+                customer = f'Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n'
+                acc = ""
                 for line in self.accounts:
                     if i.id == line.id:
-                        self.acc.append(line)
-                        z = re.sub(",", ":", str(self.acc))
-                        t = str(z).strip().split(":")
-                        if len(t) > 3:
-                            firstacc = (
-                                f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                            secondacc = (
-                                f"Second account: \n\tAccount no: {t[3]}\n\tAccount type: {t[4]}\n\tBalance: {t[5]}")
-                        elif len(t) == 3:
-                            firstacc = (
-                                f"First account:\n\tAccount no: {t[0]}\n\tAccount type: {t[1]}\n\tBalance: {t[2]}\n")
-                            secondacc = (
-                                f"Second account: \n\tAccount no: {None}\n\tAccount type: {None}\n\tBalance: {None}")
+                        acc += f'\n\tAccount no: {line.accountno}\n\tAccount type: {line.accounttype}\n' \
+                               f'\tBalance: {line.balance}\n '
 
-                print(f"Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n{firstacc}{secondacc}")
+                print(f'{customer}Accounts:{acc}')
 
     def load_accounts(self):
         self.accounts = []
@@ -122,7 +111,8 @@ class Bank:
             textfile.write(
                 '\n' + Bank.get_new_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
             textfile.close()
-            return print(f'New Customer {name}: {pnr} created')
+
+        print(f'New Customer {name}: {pnr} created')
 
     def change_customer_name(self, newname, pnr):
 
@@ -152,11 +142,11 @@ class Bank:
             for line in self.customer_data:
                 if pnr in line:
                     index = self.customer_data.index(line)
-                    print(index)
                     self.customer_data.pop(index)
-
+        print(f'Customer {line}')
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % l for l in self.customer_data)
+
 
     def get_new_id(self):
 
@@ -235,7 +225,3 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
-
-
-m = Bank()
-m.close_account("460383-3555", "1003")
