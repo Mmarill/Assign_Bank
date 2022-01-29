@@ -238,7 +238,3 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
-
-
-m = Bank()
-m.close_account("139741-6173", "1002")
