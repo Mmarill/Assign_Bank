@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="close_account fix">
+    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="Menu fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/customers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +41,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.bank">
     <configuration name="bank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Assign_Bank" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,8 +86,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.bank" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +160,13 @@
       <option name="presentableId" value="LOCAL−00010" />
       <updated>1643407587645</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL−00011" summary="Menu fix">
+      <created>1643463943727</created>
+      <option name="number" value="LOCAL−00011" />
+      <option name="presentableId" value="LOCAL−00011" />
+      <updated>1643463943728</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +190,7 @@
     <MESSAGE value="close_account()" />
     <MESSAGE value="Katastrof" />
     <MESSAGE value="close_account fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="close_account fix" />
+    <MESSAGE value="Menu fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Menu fix" />
   </component>
 </project>

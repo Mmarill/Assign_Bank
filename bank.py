@@ -96,7 +96,7 @@ class Bank:
                     return print(f"No account found with account number {acc_no}.")
             return print(f"No customer found with {pnr} in list")
 
-        print(f'Account number: \n\t {y.accountno}\nAccount type: \n\t{y.accounttype}\nBalance: \n\t{y.balance}')
+        # print(f'Account number: \n\t {y.accountno}\nAccount type: \n\t{y.accounttype}\nBalance: \n\t{y.balance}')
 
     def add_customer(self, name, pnr):
 
@@ -143,10 +143,19 @@ class Bank:
                 if pnr in line:
                     index = self.customer_data.index(line)
                     self.customer_data.pop(index)
-        print(f'Customer {line}')
-        with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % l for l in self.customer_data)
+                    for i in self.customers:
+                        if pnr == i.pnr:
+                            acc = ""
+                            customer = f'Customer id: {i.id}\nName: {i.name}\nSocial security number: {i.pnr}\n'
+                            for x in self.accounts:
+                                if x.id == i.id:
+                                    acc += f'\n\tAccount no: {x.accountno}\n\tAccount type: {x.accounttype}\n' \
+                                           f'\tBalance: {x.balance}\n '
 
+                            print(f'{customer}\nAccount closed with balance: {acc}')
+
+        with open(self.ctxt, "w") as f:
+            f.writelines("%s\n" % line for line in self.customer_data)
 
     def get_new_id(self):
 
@@ -215,7 +224,9 @@ class Bank:
                     index = self.customer_data.index(line)
                     for i in self.accounts:
                         for x in self.customers:
-                            if x.id == i.id:
+                            if x.id == i.id and pnr == x.pnr and acc_no == i.accountno:
+                                c_account = f'\n\tAccount no: {i.accountno}\n\tAccount type: {i.accounttype}\n' \
+                                           f'\tBalance: {i.balance}\n '
                                 if line.count("#") == 0:
                                     Bank.remove_customer(self, pnr)
                                 elif line.count("#") == 1:
@@ -223,5 +234,11 @@ class Bank:
                                     new_line = line.replace("#" + acc, "").replace(acc + "#", "")
                                     self.customer_data[index] = new_line
 
+                                    print(f'\nAccount closed with balance: {c_account}')
+
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
+
+
+m = Bank()
+m.close_account("139741-6173", "1002")

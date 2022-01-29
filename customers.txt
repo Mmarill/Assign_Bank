@@ -1,16 +1,13 @@
-11111:Diana Alcoran:139741-6173:1001:debit account:5000.0#1002:debit account:1000.0
+11111:Diana Alcoran:139741-6173:1001:debit account:5000.0
 11112:Aubrey Sigg:460383-3555:1004:debit account:500.0
 11113:Otti Elvén:401132-0676:1005:debit account:10.0
 11114:Max Hjelm:123456-1234:1006:debit account:1580.0
 11115:Matti H:460383-3545:1007:debit account:1480.0
 11117:Matti H:467343-3545:1009:debit account:0.0
 11118:Max Henkesson:156478-9856:1010:debit account:0.0
-11119:Matti C:653789-1534:1011:debit account:0.0
 11120:heyr ahfds:216738-9076:1012:debit account:0.0
 11121:j h:432187-7584:1013:debit account:0.0
 11122:pol pot:765489-9025:1014:debit account:0.0
-11123:h i:765932-0765:1015:debit account:0.0
 11124:sdahuf fdash:876954-7547:1016:debit account:0.0
-11125:784932-8658:784932-8658:1017:debit account:0.0
 11126:ahdsif:523647-8123:1018:debit account:0.0
 11127:dsfah afds:748932-6478:1019:debit account:0.0
