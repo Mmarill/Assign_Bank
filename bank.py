@@ -68,7 +68,7 @@ class Bank:
         else:
             textfile = open("customers.txt", "a")
             textfile.write(
-                '\n' + Bank.get_top_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
+               "\n" + Bank.get_top_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
             textfile.close()
 
         print(f'New Customer {name}: {pnr} created')
@@ -254,6 +254,3 @@ class Bank:
             f.writelines("%s\n" % line for line in self.customer_data)
 
         print(f'You have deposited ${amount} to {acc_id} new balance: ${new_bal}')
-
-m = Bank()
-m.close_account("401132-0676", "1021")
