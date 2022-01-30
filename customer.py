@@ -1,10 +1,10 @@
-class Customer():
+class Customer:
 
     def __init__(self, id, name, pnr):
         self.id = id
         self.name = name
         self.pnr = pnr
-        
+
     def __str__(self):
         return self.id + " " + self.name + " " + self.pnr
 
