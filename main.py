@@ -1,5 +1,4 @@
 from bank import Bank
-import re
 
 myBank = Bank()
 

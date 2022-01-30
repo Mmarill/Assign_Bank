@@ -41,8 +41,8 @@ class Bank:
 
     def get_customers(self):
 
-        for cstmr in self.customers:
-            print(cstmr.name, cstmr.pnr)
+        for customer in self.customers:
+            print(customer.name, customer.pnr)
 
     def get_customer(self, pnr):
 
