@@ -5,7 +5,7 @@ from account import Account
 
 
 class Bank:
-    id = []
+    account_id = []
     ctxt = "customers.txt"
     accounts = []
     accountNo = []
@@ -40,6 +40,9 @@ class Bank:
         return self.customers
 
     def get_customers(self):
+
+        self.customers = []
+        Bank._load(self)
 
         for customer in self.customers:
             print(customer.name, customer.pnr)
@@ -117,6 +120,7 @@ class Bank:
             f.writelines("%s\n" % line for line in self.customer_data)
 
     def load_accounts(self):
+
         self.accounts = []
         account_data = {}
 
@@ -134,8 +138,9 @@ class Bank:
 
     def get_accounts(self):
 
-        Bank.load_accounts(self)
         self.acc_list = []
+        Bank._load(self)
+        Bank.load_accounts(self)
 
         for i in self.accounts:
             account = str(i.id) + " " + str(i.accountno) + " " + i.accounttype + " " + str(i.balance)
@@ -205,9 +210,9 @@ class Bank:
 
         for i in self.customer_data:
             x = i.strip().split(":")
-            self.id.append(x[0])
+            self.account_id.append(x[0])
 
-        new_id = int(self.id[-1]) + 1
+        new_id = int(self.account_id[-1]) + 1
 
         return str(new_id)
 
@@ -217,40 +222,50 @@ class Bank:
 
         return str(newaccount)
 
-    def withdraw(self, pnr, acc_id, amount):
+    def withdraw(self, pnr, acc_no, amount):
 
-        for i in self.customer_data:
-            if pnr in repr(i):
-                index = self.customer_data.index(i)
-                x = i.replace("#", ":").split(":")
-                newindex = x.index(acc_id)
-                old_bal = x[newindex + 2]
-                new_bal = float(old_bal[:-2]) - float(amount)
-                if new_bal < 0:
-                    return "Not enough money in account"
-                new_line = i.replace(old_bal, str(new_bal))
-                self.customer_data[index] = new_line
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("\nSorry wrong format, please enter social security number as xxxxxx-xxxx")
+            return False
+        else:
+            for i in self.customer_data:
+                if pnr in repr(i):
+                    index = self.customer_data.index(i)
+                    r1 = i.replace("#", ":").split(":")
+                    if acc_no not in r1:
+                        return print("\nCustomer does not have account with that account number")
+                    index2 = r1.index(acc_no)
+                    old_bal = r1[index2 + 2]
+                    new_bal = float(old_bal) - float(amount)
+                    if new_bal < 0:
+                        print("\nNot enough money in account")
+                        return False
+                    new_line = i.replace(old_bal, str(new_bal))
+                    self.customer_data[index] = new_line
+                    print(f"\nWithdraw successful! \nOld balance: {old_bal} \nNew balance: {str(new_bal)}")
+                    with open(self.ctxt, "w") as f:
+                        f.writelines("%s\n" % line for line in self.customer_data)
+                    return True
 
-        with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % line for line in self.customer_data)
+    def deposit(self, pnr, acc_no, amount):
 
-        print(f'You have withdrawn ${amount} from {acc_id} new balance: ${new_bal}')
+        if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
+            print("\nSorry wrong format, please enter social security number as xxxxxx-xxxx")
+            return False
+        else:
+            for i in self.customer_data:
+                if pnr in repr(i):
+                    index = self.customer_data.index(i)
+                    r1 = i.replace("#", ":").split(":")
+                    if acc_no not in r1:
+                        return print("\nCustomer does not have account with that account number")
+                    nyindex = r1.index(acc_no)
+                    old_bal = r1[nyindex + 2]
+                    new_bal = float(old_bal) + float(amount)
+                    new_line = i.replace(old_bal, str(new_bal))
+                    self.customer_data[index] = new_line
+                    print(f"\nDeposit successful! \nOld balance: {old_bal} \nNew balace: {new_bal}")
+                    with open(self.ctxt, "w") as f:
+                        f.writelines("%s\n" % l for l in self.customer_data)
+                    return True
 
-    def deposit(self, pnr, acc_id, amount):
-
-        for i in self.customer_data:
-            if pnr in repr(i):
-                index = self.customer_data.index(i)
-                x = i.replace("#", ":").split(":")
-                newindex = x.index(acc_id)
-                old_bal = x[newindex + 2]
-                new_bal = float(old_bal[:-2]) + float(amount)
-                if new_bal < 0:
-                    return "Not enough money in account"
-                new_line = i.replace(old_bal, str(new_bal))
-                self.customer_data[index] = new_line
-
-        with open(self.ctxt, "w") as f:
-            f.writelines("%s\n" % line for line in self.customer_data)
-
-        print(f'You have deposited ${amount} to {acc_id} new balance: ${new_bal}')

@@ -22,7 +22,7 @@ while ans:
         myBank.get_customer(pnr)
         print('*' * 20)
     elif ans == "3":
-        pnr = input("Please enter social security number of customer you want to delete")
+        pnr = input("Please enter social security number of customer you want to delete: ")
         myBank.remove_customer(pnr)
         print('*' * 20)
     elif ans == "4":
@@ -30,6 +30,7 @@ while ans:
         myBank.get_customer(pnr)
         acc_id = input("Enter from which account you wish to withdraw: ")
         amount = input("Enter amount to withdraw: ")
+
         myBank.withdraw(pnr, acc_id, amount)
         print('*' * 20)
     elif ans == "5":
