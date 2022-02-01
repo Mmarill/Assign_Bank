@@ -5,6 +5,9 @@ myBank = Bank()
 ans = True
 while ans:
 
+    myBank.load_accounts()
+    myBank.load_customers()
+
     print('*' * 20)
     print("1.Add a customer \n2.Get customer \n3.Delete customer \n4.Withdraw \n5.Deposit"
           "\n6.Get account \n7.Add account \n8.Delete account \n9.Get all customers \n10.Change customer name"

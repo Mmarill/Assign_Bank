@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="Add customer_change name to menu">
+    <list default="true" id="25c026af-4555-4132-a3d5-080b3f8927c9" name="Changes" comment="Load fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/customers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/customers.txt" afterDir="false" />
@@ -219,7 +219,13 @@
       <option name="presentableId" value="LOCAL−00019" />
       <updated>1643717332360</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL−00020" summary="Load fix">
+      <created>1643723040588</created>
+      <option name="number" value="LOCAL−00020" />
+      <option name="presentableId" value="LOCAL−00020" />
+      <updated>1643723040588</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -250,6 +256,7 @@
     <MESSAGE value="Done menu" />
     <MESSAGE value="fix deposít" />
     <MESSAGE value="Add customer_change name to menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add customer_change name to menu" />
+    <MESSAGE value="Load fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load fix" />
   </component>
 </project>

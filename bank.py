@@ -46,10 +46,6 @@ class Bank:
 
     def get_customers(self):
 
-        self.customers = []
-        Bank._load(self)
-        Bank.load_customers(self)
-
         for customer in self.customers:
             print(customer.name, customer.pnr)
 
@@ -80,10 +76,10 @@ class Bank:
                "\n" + Bank.get_top_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
             textfile.close()
 
-        Bank.load_customers(self)
-        Bank.load_accounts(self)
-
         print(f'New Customer {name}: {pnr} created')
+
+        Bank.load_accounts(self)
+        Bank.load_customers(self)
 
     def change_customer_name(self, newname, pnr):
 
@@ -103,9 +99,6 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
-
-        Bank.load_customers(self)
-        Bank.load_accounts(self)
 
     def remove_customer(self, pnr):
 
@@ -131,12 +124,9 @@ class Bank:
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
 
-        Bank._load()
-        Bank.load_accounts(self)
-        Bank.load_customers(self)
-
     def load_accounts(self):
 
+        Bank._load(self)
         self.accounts = []
         account_data = {}
 
@@ -153,10 +143,6 @@ class Bank:
                 nr_acc -= 1
 
     def get_accounts(self):
-
-        self.acc_list = []
-        Bank._load(self)
-        Bank.load_accounts(self)
 
         for i in self.accounts:
             account = str(i.id) + " " + str(i.accountno) + " " + i.accounttype + " " + str(i.balance)

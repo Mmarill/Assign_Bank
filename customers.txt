@@ -16,3 +16,8 @@
 11130:potatis:784953-0764:1041:debit account:0.0
 11131:potatis:894532-4124:1042:debit account:0.0
 11132:Hjelm:876392-0764:1045:debit account:0.0
+11133:Jo:890354-6384:1046:debit account:0.0
+11134:Io:790321-6372:1047:debit account:0.0
+11135:oi:960594-1246:1048:debit account:0.0
+11136:Op:985423-0271:1049:debit account:0.0
+11137:utre:741328-1442:1050:debit account:0.0
