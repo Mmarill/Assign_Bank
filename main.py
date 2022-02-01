@@ -6,7 +6,7 @@ ans = True
 while ans:
     print('*' * 20)
     print("1.Add a customer \n2.Get customer \n3.Delete customer \n4.Withdraw \n5.Deposit"
-          "\n6.Get account \n7.Add account \n8.Delete account \n9.Get all customers"
+          "\n6.Get account \n7.Add account \n8.Delete account \n9.Get all customers \n10.Change customer name"
           "\nE.Exit/Quit")
     print('*' * 20)
 
@@ -45,11 +45,11 @@ while ans:
         print(myBank.get_account(pnr, acc_no))
         print('*' * 20)
     elif ans == "7":
-        pnr = input("Please enter social security number for whom you wish to add an account")
+        pnr = input("Please enter social security number for whom you wish to add an account: ")
         myBank.add_account(pnr)
         print('*' * 20)
     elif ans == "8":
-        pnr = input("Please enter social security number for whom you wish to remove an account")
+        pnr = input("Please enter social security number for whom you wish to remove an account: ")
         myBank.get_customer(pnr)
         acc_no = input("Please enter account number: ")
         myBank.close_account(pnr, acc_no)
@@ -57,6 +57,10 @@ while ans:
     elif ans == "9":
         myBank.get_customers()
         print('*' * 20)
+    elif ans == "10":
+        pnr = input("Please enter social security number for customer to change name: ")
+        newname = input("Please enter customers new name: ")
+        myBank.change_customer_name(newname, pnr)
     elif ans == "E":
         print("\n Goodbye")
         ans = False
