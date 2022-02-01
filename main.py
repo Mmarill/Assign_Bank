@@ -40,7 +40,7 @@ while ans:
     elif ans == "5":
         pnr = input("Please enter your social security number: ")
         myBank.get_customer(pnr)
-        acc_id = input("Enter from which account you wish to withdraw: ")
+        acc_id = input("Enter from which account you wish to deposit: ")
         amount = input("Enter amount to withdraw: ")
         myBank.deposit(pnr, acc_id, amount)
         print('*' * 20)
