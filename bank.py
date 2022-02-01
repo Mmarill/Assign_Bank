@@ -5,6 +5,7 @@ from account import Account
 
 
 class Bank:
+
     account_id = []
     ctxt = "customers.txt"
     accounts = []
@@ -31,11 +32,15 @@ class Bank:
 
     def load_customers(self):
 
+        self.customers = []
+
+        Bank._load(self)
+
         for i in self.customer_data:
             x = re.sub("#", ":", str(i))
             y = x.split(":")
-            cstmr = Customer(y[0], y[1], y[2])
-            self.customers.append(cstmr)
+            customer = Customer(y[0], y[1], y[2])
+            self.customers.append(customer)
 
         return self.customers
 
@@ -43,6 +48,7 @@ class Bank:
 
         self.customers = []
         Bank._load(self)
+        Bank.load_customers(self)
 
         for customer in self.customers:
             print(customer.name, customer.pnr)
@@ -74,6 +80,9 @@ class Bank:
                "\n" + Bank.get_top_id(self) + f':{name}:{pnr}:' + Bank.get_top_account(self) + f':debit account:0.0')
             textfile.close()
 
+        Bank.load_customers(self)
+        Bank.load_accounts(self)
+
         print(f'New Customer {name}: {pnr} created')
 
     def change_customer_name(self, newname, pnr):
@@ -94,6 +103,9 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
+
+        Bank.load_customers(self)
+        Bank.load_accounts(self)
 
     def remove_customer(self, pnr):
 
@@ -118,6 +130,10 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
+
+        Bank._load()
+        Bank.load_accounts(self)
+        Bank.load_customers(self)
 
     def load_accounts(self):
 
@@ -178,6 +194,9 @@ class Bank:
 
         print("New account added!")
 
+        Bank.load_accounts(self)
+        Bank.load_customers(self)
+
     def close_account(self, pnr, acc_no):
 
         if re.match('[0-9]{6}-[0-9]{4}', pnr) is None:
@@ -203,6 +222,9 @@ class Bank:
 
         with open(self.ctxt, "w") as f:
             f.writelines("%s\n" % line for line in self.customer_data)
+        Bank._load(self)
+        Bank.load_customers(self)
+        Bank.load_accounts(self)
 
     def get_top_id(self):
 
